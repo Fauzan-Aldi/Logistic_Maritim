@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Peta Interaktif Indonesia</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    #map {
+      height: 500px;
+      width: 100%;
+      border: 2px solid #333;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    var map = L.map('map').setView([-2.5, 118], 5); // Fokus tengah Indonesia
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Koordinat kota-kota
+    var cities = [
+      { name: "Aceh", latlng: [5.548290, 95.323753] },
+      { name: "Batam", latlng: [1.082932, 104.030453] },
+      { name: "Jakarta", latlng: [-6.200000, 106.816666] },
+      { name: "Semarang", latlng: [-6.966667, 110.416664] },
+      { name: "Pontianak", latlng: [0.026330, 109.342503] },
+      { name: "Bali", latlng: [-8.409518, 115.188919] },
+      { name: "Makassar", latlng: [-5.147665, 119.432732] },
+      { name: "Timika", latlng: [-4.528287, 136.888451] }
+    ];
+
+    // Tambahkan marker dan simpan koordinat untuk polyline
+    var latlngs = [];
+
+    cities.forEach(function(city) {
+      L.marker(city.latlng).addTo(map)
+        .bindPopup(`<b>${city.name}</b>`);
+      latlngs.push(city.latlng);
+    });
+
+    // Tambahkan garis penghubung antar kota
+    L.polyline(latlngs, {color: 'blue'}).addTo(map);
+  </script>
+</body>
+</html>

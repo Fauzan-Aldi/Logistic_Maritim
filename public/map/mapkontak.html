@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Peta Lokasi Tanjung Pinang</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+  <style>
+    #map {
+      height: 320px;
+      width: 100%;
+      border: 2px solid #333;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+  <script>
+    // Koordinat Tanjung Pinang, Kepulauan Riau
+    var lokasi = [0.916667, 104.450000];
+
+    // Inisialisasi peta
+    var map = L.map('map').setView(lokasi, 15);
+
+    // Tambahkan tile dari OpenStreetMap
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Tambahkan marker dan popup
+    L.marker(lokasi).addTo(map)
+      .bindPopup("<b>Tanjung Pinang</b><br>Jalan Pantai Indah, Gang Pantai Indah No. 72<br>Kode Pos 29113<br>Kepulauan Riau")
+      .openPopup();
+  </script>
+</body>
+</html>
